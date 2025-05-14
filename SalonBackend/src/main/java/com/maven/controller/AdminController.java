@@ -1,40 +1,45 @@
 package com.maven.controller;
 
 import com.maven.exception.InvalidCredentialsException;
-import com.maven.exception.UserNameAlreadyExistsException;
 import com.maven.models.Admin;
-import com.maven.services.UserService;
+import com.maven.services.AdminService;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/salon")
+@RequestMapping("/admin")
 @CrossOrigin("*")
-public class UserController {
+public class AdminController {
 
     @Autowired
-    private UserService userService;
+    private AdminService adminService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
 
     @PostConstruct
-    public void createAdmin() throws UserNameAlreadyExistsException {
+    public void createAdmin(){
         Admin admin = new Admin();
         admin.setUserName("Admin");
         admin.setEmail("admin@gmail.com");
         admin.setContact("1234567890");
         admin.setPassword(passwordEncoder.encode("123"));
-        userService.addUser(admin);
+        adminService.addUser(admin);
     }
 
     @PostMapping("/login")
-    public Admin login(@RequestBody Admin admin) throws InvalidCredentialsException {
-        return userService.login(admin);
+    public String login(@RequestBody Admin admin) {
+        return adminService.verify(admin);
+    }
+
+    @GetMapping("/")
+    public String session(HttpSession session){
+        return "SESSION Id: "+session.getId();
     }
 
 
