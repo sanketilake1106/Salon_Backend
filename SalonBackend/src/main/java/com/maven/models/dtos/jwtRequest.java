@@ -8,11 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdminDto {
+public class jwtRequest {
 
-    private  Long id;
-    private String UserName;
-    private String email;
-    private String contact;
+
+    private String username;
     private String password;
+
 }

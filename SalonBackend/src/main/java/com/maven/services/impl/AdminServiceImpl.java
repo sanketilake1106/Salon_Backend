@@ -16,17 +16,16 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminRepository adminRepository;
 
-    @Autowired
-    AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtService service;
-
+    @Override
+    public String verify(String email, String password) {
+        return null;
+    }
 
     @Override
     public Admin addUser(Admin admin) {
 
-        if(adminRepository.findByEmail(admin.getEmail()).isEmpty()){
+        if(adminRepository.findByUsername(admin.getUsername()).isEmpty()){
             return adminRepository.save(admin);
         }else{
             return null;
