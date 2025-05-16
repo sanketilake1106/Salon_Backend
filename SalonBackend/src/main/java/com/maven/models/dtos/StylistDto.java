@@ -14,7 +14,6 @@ public class StylistDto {
     private String email;
     private String contact;
     private String specialization;
-    private byte[] profileImage;
     private String bio;
     private boolean isActive;
 }

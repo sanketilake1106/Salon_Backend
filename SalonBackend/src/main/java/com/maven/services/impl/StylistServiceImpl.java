@@ -46,10 +46,10 @@ public class StylistServiceImpl implements StylistService {
             stylistDto.setStylistId(stylist.getStylistId());
             stylistDto.setStylistName(stylist.getStylistName());
             stylistDto.setEmail(stylist.getEmail());
-            stylistDto.setProfileImage(stylist.getProfileImage());
             stylistDto.setContact(stylist.getContact());
+            stylistDtos.add(stylistDto);
         });
-
         return stylistDtos;
     }
+
 }

@@ -2,7 +2,6 @@ package com.maven.services;
 
 import com.maven.models.Stylist;
 import com.maven.models.dtos.StylistDto;
-
 import java.io.IOException;
 import java.util.List;
 

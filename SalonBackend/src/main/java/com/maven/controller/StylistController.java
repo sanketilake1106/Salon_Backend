@@ -28,8 +28,7 @@ public class StylistController {
             @RequestParam("email") String email,
             @RequestParam("contact") String contact,
             @RequestParam("specialization") String specialization,
-            @RequestParam("bio") String bio,
-            @RequestParam("image") MultipartFile image) throws IOException {
+            @RequestParam("bio") String bio) {
 
         Stylist stylist = new Stylist();
         stylist.setStylistName(stylistName);
@@ -37,7 +36,6 @@ public class StylistController {
         stylist.setContact(contact);
         stylist.setSpecialization(specialization);
         stylist.setBio(bio);
-        stylist.setProfileImage(image.getBytes());
         stylist.setActive(true);
 
         return ResponseEntity.ok(stylistService.addStylist(stylist));
@@ -49,8 +47,7 @@ public class StylistController {
                                             @RequestParam("email") String email,
                                             @RequestParam("contact") String contact,
                                             @RequestParam("specialization") String specialization,
-                                            @RequestParam("bio") String bio,
-                                            @RequestParam("image") MultipartFile image) throws IOException{
+                                            @RequestParam("bio") String bio){
 
         Stylist stylist = new Stylist();
         stylist.setStylistId(stylistId);
@@ -59,7 +56,6 @@ public class StylistController {
         stylist.setContact(contact);
         stylist.setSpecialization(specialization);
         stylist.setBio(bio);
-        stylist.setProfileImage(image.getBytes());
         stylist.setActive(true);
         return ResponseEntity.ok(stylistService.addStylist(stylist));
     }

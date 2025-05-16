@@ -18,8 +18,6 @@ public class Stylist {
     private String email;
     private String contact;
     private String specialization;
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] profileImage;
     private String bio;
     private boolean isActive = true;
 }

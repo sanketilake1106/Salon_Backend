@@ -24,11 +24,12 @@ public class AdminServiceImpl implements AdminService {
 
 
     @Override
-    public String verify(Admin admin) {
-        Authentication authentication=authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(admin.getEmail(),admin.getPassword()));
-        if(authentication.isAuthenticated()){
-            return service.generateToken(admin.getEmail());
+    public String verify(String email, String password) {
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(email, password));
+
+        if (authentication.isAuthenticated()) {
+            return service.generateToken(email);
         }
         return "Fail";
     }
