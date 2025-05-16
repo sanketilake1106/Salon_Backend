@@ -1,6 +1,6 @@
 package com.maven.filter;
 
-import com.maven.config.customUserDetailIMPL;
+import com.maven.config.CustomUserDetailIMPL;
 import com.maven.services.impl.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,11 +27,6 @@ public class JwtFilter extends OncePerRequestFilter {
     ApplicationContext context;
 
 
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getServletPath();
-        return path.equals("/admin/login"); // ✅ Skip filtering for login
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -45,7 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = context.getBean(customUserDetailIMPL.class).loadUserByUsername(username);
+            UserDetails userDetails = context.getBean(CustomUserDetailIMPL.class).loadUserByUsername(username);
 
             if (service.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken =
@@ -58,4 +53,10 @@ public class JwtFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.equals("/login"); // ✅ Skip filtering for login
+    }
 }

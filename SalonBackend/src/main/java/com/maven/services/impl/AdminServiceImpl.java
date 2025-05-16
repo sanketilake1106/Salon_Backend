@@ -24,17 +24,6 @@ public class AdminServiceImpl implements AdminService {
 
 
     @Override
-    public String verify(String email, String password) {
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(email, password));
-
-        if (authentication.isAuthenticated()) {
-            return service.generateToken(email);
-        }
-        return "Fail";
-    }
-
-    @Override
     public Admin addUser(Admin admin) {
 
         if(adminRepository.findByEmail(admin.getEmail()).isEmpty()){
